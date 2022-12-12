@@ -1,3 +1,5 @@
+require 'set'
+
 # .lines(chomp: true) = split on line endings (kind of)
 dings = File.read("input.txt").lines(chomp: true).map{|x|
   x.chomp.chars.map{_1.ord-'a'.ord+1}
@@ -100,7 +102,7 @@ dings = File.read("input.txt").lines(chomp: true).map{|x|
 # # search algo bfs style
 # # -------------------------------
 # counter=0
-# visited = []
+# visited = Set.new
 # queue = [[startX, startY, 0]]
 # while !queue.empty? do
 #   value = queue.shift
@@ -192,7 +194,7 @@ dings.each_with_index{
   |value, x|
 if(value==1)then
 counter=0
-visited = []
+visited = Set.new
 queue = [[x, y, 0]]
 while !queue.empty? do
   value = queue.shift
@@ -207,7 +209,7 @@ while !queue.empty? do
   end
 
   if(!visited.include?([valueX,valueY]*","))then
-  visited.push([valueX,valueY]*",")
+  visited << ([valueX,valueY]*",")
 
   currentValue = dings[valueY][valueX]
   adjacent=[]
@@ -217,28 +219,28 @@ while !queue.empty? do
       dings[valueY + 1][valueX] <= currentValue + 1 &&
       !visited.include?([valueX, valueY+1]*",")
     ) then
-      adjacent.push([valueX, valueY+1,counter])
+      adjacent << ([valueX, valueY+1,counter])
     end
     if(
       valueY - 1 >= 0 && valueX < maxX &&
       dings[valueY - 1][valueX] <= currentValue + 1 &&
       !visited.include?([valueX, valueY-1]*",")
     ) then
-      adjacent.push([valueX, valueY-1,counter])
+      adjacent << ([valueX, valueY-1,counter])
     end
     if(
       valueY < maxY && valueX - 1 >= 0 &&
       dings[valueY][valueX - 1] <= currentValue + 1 &&
       !visited.include?([valueX-1, valueY]*",")
     ) then
-      adjacent.push([valueX-1, valueY,counter])
+      adjacent << ([valueX-1, valueY,counter])
     end
     if(
       valueY < maxY && valueX + 1 < maxX &&
       dings[valueY][valueX + 1] <= currentValue + 1 &&
       !visited.include?([valueX+1, valueY]*",")
     ) then
-      adjacent.push([valueX+1, valueY,counter])
+      adjacent << ([valueX+1, valueY,counter])
     end
 
     queue.push(*adjacent)
