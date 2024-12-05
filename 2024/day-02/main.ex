@@ -22,6 +22,7 @@ dings =
 IO.inspect(dings)
 
 # part 1
+
 # The levels are either all increasing or all decreasing.
 # Any two adjacent levels differ by at least one and at most three
 defmodule Safe do
