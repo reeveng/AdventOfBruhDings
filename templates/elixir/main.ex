@@ -1,6 +1,6 @@
 require File
 
-file_path = "input.txt"
+file_path = "input.test"
 
 if(!File.exists?(file_path)) do
   IO.puts("bruh, this file doesn't exist")
