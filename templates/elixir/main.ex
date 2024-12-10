@@ -10,6 +10,6 @@ end
 
 # part 1
 
-IO.inspect(input)
+IO.inspect(input, charlists: :as_lists, limit: :infinity)
 
 # part 2
