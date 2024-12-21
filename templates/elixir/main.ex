@@ -8,8 +8,8 @@ end
 
 {:ok, input} = File.read(file_path)
 
-# part 1
-
 IO.inspect(input, charlists: :as_lists, limit: :infinity)
+
+# part 1
 
 # part 2
